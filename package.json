@@ -1,0 +1,52 @@
+{
+  "name": "fybr-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "dev:client": "webpack-dev-server",
+    "dev:api": "node server",
+    "migrate": "knex migrate:latest",
+    "seed": "knex seed:run"
+  },
+  "author": "FYBR Solutions Inc.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@turf/turf": "^5.1.6",
+    "@vx/axis": "0.0.179",
+    "@vx/gradient": "0.0.165",
+    "@vx/group": "0.0.170",
+    "@vx/scale": "0.0.179",
+    "@vx/shape": "0.0.179",
+    "axios": "^0.18.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "knex": "^0.15.2",
+    "mapbox-gl": "^0.50.0",
+    "normalize.css": "^8.0.0",
+    "pg": "^7.5.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "reselect": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.3",
+    "redux-devtools-extension": "^2.13.5",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}
