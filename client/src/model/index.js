@@ -37,4 +37,10 @@ export const getSites = createSelector(
   [allSites],
   sites => sites.ids.map(id => sites.byId[id])
 );
+
+export const getProjectSites = createSelector(
+  (state, props) => props.item,
+  getSites,
+  (project, sites) => sites.filter(s => project.sites.includes(s.id))
+);
   
