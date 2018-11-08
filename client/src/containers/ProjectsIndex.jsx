@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { FETCH_PROJECTS_COMPLETED, fetchProjects } from '../model/projects';
 import { FETCH_SITES_COMPLETED, fetchSites } from '../model/sites';
+import { FETCH_TREES_COMPLETED, fetchTrees } from '../model/trees';
 
 import Layout from '../layouts/Layout';
 import Sidebar from './Sidebar';
@@ -14,6 +15,7 @@ class ProjectsIndex extends Component {
   componentDidMount() {
     this.props.fetchProjects();
     this.props.fetchSites();
+    this.props.fetchTrees();
   }
 
   render() {
@@ -35,13 +37,15 @@ function mapStateToProps(state) {
   return {
     loaded: state.projects.status === FETCH_PROJECTS_COMPLETED &&
             state.sites.status === FETCH_SITES_COMPLETED &&
+            state.trees.status === FETCH_TREES_COMPLETED &&
             state.sites.selected !== null
   };
 }
 
 const mapDispatchToProps = {
   fetchProjects,
-  fetchSites
+  fetchSites,
+  fetchTrees
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsIndex);

@@ -5,11 +5,13 @@ import { createSelector } from 'reselect';
 import projects from './projects';
 import sites from './sites';
 import map from './map';
+import trees from './trees';
 
 const reducers = combineReducers({
   projects,
   sites,
-  map
+  map,
+  trees
 });
 
 const middleware = [
