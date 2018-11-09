@@ -10,7 +10,7 @@ import { getSiteTrees } from '../model';
 
 class InteractiveMap extends Component {
 
-  getColor(height){
+  getGradientRangeColor(height){
     return {
       "circle-color": [
         "interpolate-hcl",
@@ -62,7 +62,7 @@ class InteractiveMap extends Component {
           <Layer 
             id={t.id.toString()} 
             type="circle" 
-            paint={this.getColor(t.height)} 
+            paint={this.getGradientRangeColor(t.height)} 
             source={t.id.toString()} 
             key={t.id}/>
           )}

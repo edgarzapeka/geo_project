@@ -7,7 +7,7 @@ import { Bar } from '@vx/shape';
 import { Group } from '@vx/group';
 
 import { getSiteTrees } from '../model';
-import { classifyTreesByHight, getMaxNumberOfTreesPerCluster} from '../util/chartHelper';
+import { classifyTreesByHight, getMaxNumberOfTreesPerCluster, CHART_MARGIN} from '../helpers/chartHelper';
 
 class Chart extends Component {
   state = {
@@ -41,25 +41,17 @@ class Chart extends Component {
     const { trees } = this.props;
 
     const x = d => d.map(( value, index ) => (index + 1) * 10);
-    const y = d => d.map(( value, index ) => value.length);
-
-    const margin = {
-      top: 60,
-      right: 20,
-      bottom: 40,
-      left: 40
-    }
 
     const classifyedTrees = Object.values(classifyTreesByHight(trees));
 
     const xScale = scaleBand({
-      rangeRound:[0, width - margin.left - margin.right],
+      rangeRound:[0, width - CHART_MARGIN.left - CHART_MARGIN.right],
       domain: x(classifyedTrees),
       padding: 0.2
     })
 
     const yScale = scaleLinear({
-        rangeRound: [0, height - margin.bottom - margin.top],
+        rangeRound: [0, height - CHART_MARGIN.bottom - CHART_MARGIN.top],
         domain: [
           getMaxNumberOfTreesPerCluster(Object.values(classifyTreesByHight(trees))),
           0
@@ -84,14 +76,14 @@ class Chart extends Component {
           fill={`url(#gradient)`}
         />
 
-        <Group left={margin.left} top={margin.top}>
+        <Group left={CHART_MARGIN.left} top={CHART_MARGIN.top}>
           {classifyedTrees.map((d, i) => {
           const barHeight = height - yScale(d.length);
           return (
             <Group key={`bar-${i}`}>
               <Bar
                 width={xScale.bandwidth()}
-                height={barHeight - margin.bottom - margin.top}
+                height={barHeight - CHART_MARGIN.bottom - CHART_MARGIN.top}
                 x={xScale((i + 1) * 10)}
                 y={yScale(d.length)}
                 fill="rgba(23, 233, 217, .5)"
@@ -112,7 +104,7 @@ class Chart extends Component {
           />
           <AxisBottom
             scale={xScale}
-            top={height - margin.bottom - margin.top}
+            top={height - CHART_MARGIN.bottom - CHART_MARGIN.top}
             numTicks={7}
             hideTicks={true}
             hideAxisLine={true}

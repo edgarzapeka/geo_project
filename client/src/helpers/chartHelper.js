@@ -1,3 +1,9 @@
+export const CHART_MARGIN = {
+    top: 60,
+    right: 20,
+    bottom: 40,
+    left: 40
+}
 export const classifyTreesByHight = (trees) => {
     let classifiedTrees = {
       0: [],
