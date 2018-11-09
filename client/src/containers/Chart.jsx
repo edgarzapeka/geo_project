@@ -52,8 +52,6 @@ class Chart extends Component {
 
     const classifyedTrees = Object.values(classifyTreesByHight(trees));
 
-    console.log(x(classifyedTrees))
-
     const xScale = scaleBand({
       rangeRound:[0, width - margin.left - margin.right],
       domain: x(classifyedTrees),

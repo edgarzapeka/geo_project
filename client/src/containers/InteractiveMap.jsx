@@ -6,10 +6,25 @@ import * as turf from '@turf/turf';
 import Map, { Layer, Sources, GeoJSON } from '../components/map';
 
 import { centerMapOnSite, mapSetCenter, mapSetZoom } from '../model/map';
+import { getSiteTrees } from '../model';
 
 class InteractiveMap extends Component {
+
+  getColor(height){
+    return {
+      "circle-color": [
+        "interpolate-hcl",
+        ['linear'],
+        height,
+        0, '#FFFFFF',
+        70, '#5A8442'
+      ],
+    }
+  }
+
   render() {
     const { bounding } = this.props.currentSite;
+    const trees = this.props.trees;
     
     const boundingFeature = turf.polygon([[
       [bounding.left, bounding.top],
@@ -23,6 +38,7 @@ class InteractiveMap extends Component {
       <Map { ...this.props }>
         <Sources>
           <GeoJSON id="bounding-box" data={ boundingFeature } />
+          { trees.map(t => <GeoJSON id={t.id.toString()} data={turf.point([t.long, t.lat])} key={t.id}/>) }
         </Sources>
         <Layer
           id="bounding-box"
@@ -33,6 +49,23 @@ class InteractiveMap extends Component {
           }}
           source="bounding-box"
         />
+        <Layer
+          id="transparent-layer"
+          type="fill"
+          paint={{
+            'fill-color': '#FFFFFF',
+            'fill-opacity': 0.2
+          }}
+          source="bounding-box" 
+        />
+        { trees.map(t => 
+          <Layer 
+            id={t.id.toString()} 
+            type="circle" 
+            paint={this.getColor(t.height)} 
+            source={t.id.toString()} 
+            key={t.id}/>
+          )}
       </Map>
     );
   }
@@ -42,14 +75,15 @@ function mapStateToProps(state) {
   return {
     currentSite: state.sites.byId[state.sites.selected],
     center: state.map.center,
-    zoom: state.map.zoom
+    zoom: state.map.zoom,
+    trees: getSiteTrees(state, state)
   };
 }
 
 const mapDispatchToProps = {
   centerMapOnSite,
   mapSetCenter,
-  mapSetZoom
+  mapSetZoom,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InteractiveMap);
