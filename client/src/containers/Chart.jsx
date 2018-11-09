@@ -46,7 +46,7 @@ class Chart extends Component {
     const margin = {
       top: 60,
       right: 20,
-      bottom: 20,
+      bottom: 40,
       left: 40
     }
 
@@ -104,8 +104,6 @@ class Chart extends Component {
             hideAxisLine={true}
             hideTicks={true}
             tickLabelProps={(val, i) => ({
-              //dx: '3em', 
-              //dy: '3em', 
               textAnchor: 'end', 
               fontFamily: 'Helvetica', 
               fontSize: 12,
@@ -115,13 +113,12 @@ class Chart extends Component {
           <AxisBottom
             scale={xScale}
             top={height - margin.bottom - margin.top}
-            left={margin.left}
             numTicks={7}
             hideTicks={true}
             hideAxisLine={true}
             tickFormat={(val, i) => `${val - 10}m - ${val}m`}
             tickLabelProps={(val, i) => ({
-              textAnchor: 'end', 
+              textAnchor: 'middle', 
               fontFamily: 'Helvetica', 
               fontSize: 12,
               fontWeight: 'bold',

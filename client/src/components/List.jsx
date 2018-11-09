@@ -24,9 +24,9 @@ class List extends Component {
 
     return (
       <ul>
-        <li className={ `${styles.listItem} ${styles.projectName} `} onClick={() => this.setState((state, props) => ({ showSites: !state.showSites })) }>{ item.name }</li>
+        <li className={ `${styles.listItem} ${styles.projectName} `} onClick={() => this.setState((state, props) => ({ showSites: !state.showSites })) }><a href="#">{ item.name }</a></li>
         { showSites && (
-            projectSites.map(s => <li className={ styles.listItem } key={s.id} onClick={() => this.onSiteSelectedHandler(s.id)}>{s.name}</li>)
+            projectSites.map(s => <li className={ styles.listItem } key={s.id} onClick={() => this.onSiteSelectedHandler(s.id)}><a href="#">{s.name}</a></li>)
         ) }
       </ul>
     );
