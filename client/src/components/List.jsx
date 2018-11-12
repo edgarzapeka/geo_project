@@ -15,7 +15,6 @@ class List extends Component {
 
   onSiteSelectedHandler = id => {
     this.props.centerMapOnSite(id);
-    this.props.sitesSetCurrent(id);
   }
 
   render(){
