@@ -4,7 +4,6 @@ module.exports = (db) => {
   router.get('/', (request, response, next) => {
     db('select sites.id, sites.name, sites.bounding, trees.id as tree_id from sites, trees where trees.site_id = sites.id')
     .then(data => {
-      console.log(data)
       let sites = {};
 
       sites.ids = Array.from(new Set(data.map(p => p.id)));
