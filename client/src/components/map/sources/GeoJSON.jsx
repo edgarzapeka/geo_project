@@ -36,6 +36,9 @@ class GeoJSON extends Component {
   }
 
   componentWillUnmount() {
+    if(this.props.map.getLayer(this.props.id)) {
+      this.props.map.removeLayer(this.props.id);
+    }
     this.props.map.removeSource(this.props.id);
   }
   
