@@ -4,23 +4,12 @@ import { connect } from 'react-redux';
 import * as turf from '@turf/turf';
 
 import Map, { Layer, Sources, GeoJSON } from '../components/map';
+import TreeCircle from '../components/map/layers/TreeCircle';
 
 import { centerMapOnSite, mapSetCenter, mapSetZoom } from '../model/map';
 import { getSiteTrees } from '../model';
 
 class InteractiveMap extends Component {
-
-  getGradientRangeColor(height){
-    return {
-      "circle-color": [
-        "interpolate-hcl",
-        ['linear'],
-        height,
-        0, '#FFFFFF',
-        70, '#5A8442'
-      ],
-    }
-  }
 
   render() {
     const { bounding } = this.props.currentSite;
@@ -38,7 +27,12 @@ class InteractiveMap extends Component {
       <Map { ...this.props }>
         <Sources>
           <GeoJSON id="bounding-box" data={ boundingFeature } />
-          { trees.map(t => <GeoJSON id={t.id.toString()} data={turf.point([t.long, t.lat])} key={t.id}/>) }
+          { trees.map(t => 
+            <GeoJSON 
+              id={t.id.toString()} 
+              data={turf.point([t.long, t.lat])} 
+              key={t.id}/>) 
+          }
         </Sources>
         <Layer
           id="bounding-box"
@@ -59,13 +53,11 @@ class InteractiveMap extends Component {
           source="bounding-box" 
         />
         { trees.map(t => 
-          <Layer 
-            id={t.id.toString()} 
-            type="circle" 
-            paint={this.getGradientRangeColor(t.height)} 
-            source={t.id.toString()} 
-            key={t.id}/>
-          )}
+          <TreeCircle
+            tree={t}
+            key={t.id}
+          />
+        )}
       </Map>
     );
   }
