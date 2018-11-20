@@ -4,10 +4,10 @@
   grid-template-rows: 1fr 1fr;
   width: 100vw;
   height: 100vh;
+  background-color: #333;
 }
 
 .sidebar {
-  background-color: #333;
   grid-row: span 2;
 }
 

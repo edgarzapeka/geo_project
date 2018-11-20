@@ -10,6 +10,9 @@ import Sidebar from './Sidebar';
 import InteractiveMap from './InteractiveMap';
 import Chart from './Chart';
 import Loading from '../components/Loading';
+import ErrorBoundary from '../components/ErrorBoundary';
+import ImageError from './../components/errors/ImageError';
+import TextError from '../components/errors/TextError';
 
 class ProjectsIndex extends Component {
   componentDidMount() {
@@ -25,9 +28,26 @@ class ProjectsIndex extends Component {
 
     return (
       <Layout
-        sidebar={ <Sidebar /> }
-        top={ <InteractiveMap /> }
-        bottom={ <Chart />}
+        sidebar={ 
+          <ErrorBoundary render={() => (
+            <ImageError source={'https://uploads-ssl.webflow.com/5b695a890a10953894828022/5b6b3488681f898542b16090_fybr%20logo%20horizontal_white.svg'}/>
+          )}>
+            <Sidebar />
+          </ErrorBoundary> }
+        top={ 
+          <ErrorBoundary render={() => (
+            <TextError text={'Sorry. The Interactive Map is not available'} />
+          )}>
+            <InteractiveMap />
+          </ErrorBoundary>
+         }
+        bottom={ 
+          <ErrorBoundary render={() => (
+            <TextError />
+          )}>
+            <Chart />
+          </ErrorBoundary>
+        }
       />
     );
   }
