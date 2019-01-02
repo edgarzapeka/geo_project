@@ -38,6 +38,9 @@ const Chart = props => {
   })
 
   function setSize(event) {
+    if (!chart) {
+      return;
+    }
     const { width, height } = chart.getBoundingClientRect();
 
     setWidth(width);

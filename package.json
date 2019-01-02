@@ -4,7 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
-    "dev:client": "webpack-dev-server",
+    "dev:client": "webpack-dev-server --mode development",
     "dev:api": "node server",
     "migrate": "knex migrate:latest",
     "seed": "knex seed:run"
